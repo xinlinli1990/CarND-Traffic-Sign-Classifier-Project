@@ -14,15 +14,13 @@ The goals / steps of this project are the following:
 * Analyze the softmax probabilities of the new images
 * Summarize the results with a written report
 
-## Rubric Points
-### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
-
 ---
 ### Writeup / README
 
 #### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
 
-You're reading it! and here is a link to my [project code](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
+You're reading it! and here is a link to my [project code](https://github.com/xinlinli1990/CarND-Traffic-Sign-Classifier-Project/tree/master/code)
+and [Jupyter Notebook](https://github.com/xinlinli1990/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
 
 ### Data Set Summary & Exploration
 
@@ -32,7 +30,7 @@ I used the pandas library to calculate summary statistics of the traffic
 signs data set:
 
 * The size of training set is 34799
-* The size of the validation set is 12
+* The size of the validation set is 4410
 * The size of test set is 12630
 * The shape of a traffic sign image is (32, 32, 3)
 * The number of unique classes/labels in the data set is 43
@@ -430,7 +428,7 @@ The defects might be solved by adding more "dusty traffic sign" images into trai
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction.
 Provide the top 5 softmax probabilities for each image along with the sign type of each probability.
 
-The code for making predictions on my final model is located in "./code/evaluate_single_image.py".
+The code for making predictions on my final model is located in **"./code/evaluate_single_image.py"**.
 
 ![predict_web_image1](./pics/predict_1.jpg)
 ![predict_web_image2](./pics/predict_2.jpg)

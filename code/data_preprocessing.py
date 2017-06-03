@@ -2,22 +2,6 @@ import cv2
 import numpy as np
 from sklearn.utils import shuffle
 
-def data_preprocessing_old(X_train, y_train):
-
-    for i in range(X_train.shape[0]):
-        img = X_train[i]
-        img = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
-        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
-        img[:,:,2] = clahe.apply(img[:,:,2])
-        img = cv2.cvtColor(img, cv2.COLOR_HSV2RGB)
-        X_train[i] = img
-    
-    X_train, y_train = data_normalization(X_train, y_train)
-    
-    X_train, y_train = shuffle(X_train, y_train)
-    
-    return X_train, y_train
-
 def data_normalization(X_train, y_train):
     """
     Args:
