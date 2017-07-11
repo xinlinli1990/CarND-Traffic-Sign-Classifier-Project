@@ -1,30 +1,21 @@
-# **Traffic Sign Recognition** 
-
-## Xinlin's report
+# **Traffic Sign Classifier** 
 
 ---
 
-**Build a Traffic Sign Recognition Project**
+## Introduction
 
-The goals / steps of this project are the following:
-* Load the data set
+This project aims to train a convolution neural network as a traffic sign classifier.
+
+The goals of this project are the following:
 * Explore, summarize and visualize the data set
 * Design, train and test a model architecture
 * Use the model to make predictions on new images
 * Analyze the softmax probabilities of the new images
-* Summarize the results with a written report
 
----
-### Writeup / README
-
-#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
-
-You're reading it! and here is a link to my [project code](https://github.com/xinlinli1990/CarND-Traffic-Sign-Classifier-Project/tree/master/code)
+Here is a link to my [project code](https://github.com/xinlinli1990/CarND-Traffic-Sign-Classifier-Project/tree/master/code)
 and [Jupyter Notebook](https://github.com/xinlinli1990/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
 
-### Data Set Summary & Exploration
-
-#### 1. Provide a basic summary of the data set. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
+## Dataset
 
 I used the pandas library to calculate summary statistics of the traffic
 signs data set:
@@ -35,15 +26,13 @@ signs data set:
 * The shape of a traffic sign image is (32, 32, 3)
 * The number of unique classes/labels in the data set is 43
 
-#### 2. Include an exploratory visualization of the dataset.
-
-I counted the number of images for each traffic sign label and ploted the following bar chart showing the dataset distribution. 
+Then I counted the number of images for each traffic sign label and ploted the following bar chart showing the dataset distribution. 
 
 ![count](./pics/before.png)
 
 It is obvious that some labels have much less images than others. Ideally, each class should have exactly equal number of instances. Therefore, data augmentation is necessary for this project. 
 
-Then I plot 10 images per label.
+Then I visualized 10 images per label.
 
 ![visualization](./pics/visualization.jpg)
 
@@ -75,9 +64,7 @@ Mathematically, the histograms of image 1 and 2 are also much more similar than 
 
 Thus, for better classfication accuracy, the pre-processing step should be introduced to reduce the difference from different lighting condition.
 
-### Design and Test a Model Architecture
-
-#### 1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. 
+## Model Architecture
 
 The training dataset is relatively small and unbalanced, thus I implemented an data augmentation pipeline based on skimage. The image augmentation function will generate new images by randomly apply rotation and projective transform on existing images.
 
@@ -284,7 +271,9 @@ def data_normalization(X_train, y_train):
     return ret_X_train, ret_y_train
 ```
 
-#### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.
+## Model
+
+### Model architecture
 
 My final model consisted of the following layers:
 
@@ -337,11 +326,11 @@ After the convolution modules, the features are flattened and passed through two
  
 
 
-#### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
+### Model training hyperparamters
 
 **Adam optimizer** was used to train the model and **learning rate** was fixed at **5e-3** since it works well. **batch size** set to **128**. After several simple tests, **Dropout keep probability** set to **75%** and **L2 regularization constant** set to **1e-5**. I trained **50 epochs** and keep the best solution which achieve highest accuracy in validation dataset.
 
-#### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
+### Determine model architecture
 
 The starting point of my own model is LeNet. I added dropout into LeNet with 80% keep prob, the neural network achieved 93% validation accuracy. 
 
@@ -354,7 +343,7 @@ To reduce the overfitting, I need to reduce the model capacity. So all branches 
 For every new architectures, I test them with following steps:
 
 1. Set L2 regularization constant to 0 and dropout keep_prob set to 1.
-2. check the validity of initial training loss to make sure the implementation of neural network is correct	
+2. Check the validity of initial training loss to make sure the implementation of neural network is correct	
  *For a random initialized model classifying 43 classes problem, the initial training loss should be close to (-ln(1/43)) computed by softmax function*
 3. After verified the correctness of implementation. Try to overfit a small training set (like 20 images) and we can roughly determine learning rate range.
 4. Train with whole training set and determine the best learning rate. If the flutuation of training loss is too high, try to increase batch size or decrease learning rate.
@@ -385,9 +374,7 @@ My final model results were:
 * validation set accuracy of 98.80%
 * test set accuracy of 96.36%
 
-### Test a Model on New Images
-
-#### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
+### Test Final Model on New Images
 
 Here are seven German traffic signs that I found on the web:
 
@@ -403,7 +390,8 @@ Here are seven German traffic signs that I found on the web:
 * The third image has incorrect color and the forth image has tree background which is a noisy texture.	
 * The images in the third line might be difficult to classify because they are dusty and the traffic signs are partly occluded.
 
-#### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set.
+---
+
 Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| Top probability |
@@ -425,8 +413,7 @@ From this results, I believed the model performance could be improved by introdu
 * From the results of image 5,6 and 7, we can see the model have problems when dealing with the recognition of dusty or partly occluded traffic signs.
 The defects might be solved by adding more "dusty traffic sign" images into training set or adding "random crop" into the data augmentation pipeline.
 
-#### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction.
-Provide the top 5 softmax probabilities for each image along with the sign type of each probability.
+#### Top 5 softmax probabilities for each image
 
 The code for making predictions on my final model is located in **"./code/evaluate_single_image.py"**.
 
