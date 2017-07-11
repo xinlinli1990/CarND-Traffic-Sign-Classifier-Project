@@ -17,6 +17,8 @@ and [Jupyter Notebook](https://github.com/xinlinli1990/CarND-Traffic-Sign-Classi
 
 ## Dataset
 
+The dataset used in this project is [German Traffic Sign Recognition Benchmark(GTSRB)](http://benchmark.ini.rub.de/).
+
 I used the pandas library to calculate summary statistics of the traffic
 signs data set:
 
